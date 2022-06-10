@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- <link rel="stylesheet" href="/thinkphp5/pubilc/static/css/bootstrap.min.css" />-->
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/common.css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/mystyle2.css" />
+</head>
+<body>
+    <h2>宠物列表</h2>
+
+    <div class="info">
+        {empty name="Think.session.user.username"}
+        <div class="welcome">
+            <a href="{:url('index/user/login')}">登录</a>
+            <a href="{:url('index/user/register')}">注册</a>
+        </div>
+        {else/}
+        <div class="welcome">欢迎您！{$Think.session.user.username} </div>
+        <div class="funclist">
+            {neq name="count" value="0"}
+            <a href="{:url('index/index/checkout')}">结算订单</a>
+            {/neq}
+            <a href="{:url('index/user/resetpassword')}">修改密码</a>
+            <a href="{:url('index/index/index')}">宠物列表</a>
+            <a href="{:url('index/index/favorite')}">我的收藏</a>
+            <a href="{:url('index/index/cart')}">查看购物车</a>(当前包含<span class="count">{$count}</span>种商品)
+            <a href="{:url('index/user/logout')}">退出登录</a>
+
+        </div>
+        {/empty}
+    </div>
+
+    <div class="main">
+
+    <!--    页面左边类别导航栏-->
+        <div class="categorylist">
+            {volist name="catlist" id="catitem" }
+            <div class="category">
+                <img src="/thinkphp5/public/static/commimages/heart.png" alt="" class="littleimg">
+                <a href="{:url('index?cid='.$catitem['categoryid'])}" >{$catitem.name}</a>
+            </div>
+            {/volist}
+        </div>
+
+        <!-- 显示宠物列表 -->
+        <div id="content">
+            <div class="prodlist">
+                {volist name="list" id="item" mod="2"}
+                <!-- 奇偶行不同样式 -->
+                {eq name="mod" value="1"}
+                <div class="message2">
+                    <div class="leftcontent">
+                        <table>
+                            <tr>
+                                <td width="105">
+                                    <a href="{:url('showproduct?pid='.$item['productid'])}">
+                                        <img src="/thinkphp5/public/static/{$item.image}" alt="{$item.productname}" class="proimg">
+                                    </a>
+                                </td>
+                                <td width="100"><p class="ptitle">{$item.productname}</p></td>
+                                <td>
+                                    单价：{$item.unitprice}元<br/>
+                                    描述：{$item.descn}<br/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="subinforight">
+                        <a href="{:url('addprodtocart?pid='.$item['productid'])}">
+                            <img src="/thinkphp5/public/static/commimages/button-cart.gif" alt="放入购物车" class="littleimg">
+                        </a>
+                        <a href="{:url('addprodtofavorite?pid='.$item['productid'])}">
+                            <img src="/thinkphp5/public/static/commimages/button-wishlist.gif" alt="我的最爱" class="littleimg">
+                        </a>
+                    </div>
+                </div>
+                {/eq}
+
+                {eq name="mod" value="0"}
+                <div class="message2">
+                    <div class="leftcontent">
+                        <table>
+                            <tr>
+                                <td width="105">
+                                    <a href="{:url('showproduct?pid='.$item['productid'])}">
+                                        <img src="/thinkphp5/public/static/{$item.image}" alt="{$item.productname}" class="proimg">
+                                    </a>
+                                </td>
+                                <td width="100"><p class="ptitle">{$item.productname}</p></td>
+                                <td>单价：{$item.unitprice}元<br/>
+                                    描述：{$item.descn}<br/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="subinforight">
+                        <a href="{:url('addprodtocart?pid='.$item['productid'])}" >
+                            <img src="/thinkphp5/public/static/commimages/button-cart.gif" alt="放入购物车" class="littleimg">
+                        </a>
+                        <a href="{:url('addprodtofavorite?pid='.$item['productid'])}">
+                            <img src="/thinkphp5/public/static/commimages/button-wishlist.gif" alt="我的最爱" class="littleimg">
+                        </a>
+                    </div>
+                </div>
+                {/eq}
+                {/volist}
+                <div class="pages" style="border: 0px">
+                    {$list->render()}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

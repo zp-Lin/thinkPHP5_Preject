@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑宠物</title>
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/common.css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/mystyle3.css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/mystyle7.css" />
+</head>
+<body>
+<h2>编辑宠物</h2>
+{include file="index/admindivinfo" /}
+<div class="main">
+    <div class="categorylist">
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/addproduct')}">新增宠物</a>
+        </div>
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/prodlist')}">编辑宠物</a>
+        </div>
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/adduser')}">新增用户</a>
+        </div>
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/userlist')}">编辑用户</a>
+        </div>
+    </div>
+    <div id="content">
+        <div class="info2">
+            <h3><strong>当前一共<span class="count">{$count}</span>种商品 </strong></h3>
+        </div>
+        <div class="prodlist">
+            <table id="table1">
+                <tr class="coltitle">
+                    <td>操作</td>
+                    <td>图片</td>
+                    <td>名称</td>
+                    <td>类别</td>
+                    <td>单价</td>
+                </tr>
+                {volist name="list" id="item" mod="2"}
+                {eq name="mod" value="1"}
+                <tr class="message">
+                    <td class="littletd">
+                        <a href="{:url('delproduct?pid='.$item['productid'])}">
+                            <img src="/thinkphp5/public/static/commimages/btnDelete.png" alt="删除" class="btnimg">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{:url('editproduct?pid='.$item['productid'])}">
+                            <img src="/thinkphp5/public/static/{$item.image}" alt="{$item.productname}" class="proimg">
+                        </a>
+                    </td>
+                    <td>{$item.productname}</td>
+                    <td>{$item.name}</td>
+                    <td>{$item.unitprice}</td>
+
+                </tr>
+                {/eq}
+                {eq name="mod" value="0"}
+                <tr class="message2">
+                    <td class="littletd">
+                        <a href="{:url('delproduct?pid='.$item['productid'])}">
+                            <img src="/thinkphp5/public/static/commimages/btnDelete.png" alt="删除" class="btnimg">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{:url('editproduct?pid='.$item['productid'])}">
+                            <img src="/thinkphp5/public/static/{$item.image}" alt="{$item.productname}" class="proimg">
+                        </a>
+                    </td>
+                    <td>{$item.productname}</td>
+                    <td>{$item.name}</td>
+                    <td>{$item.unitprice}</td>
+
+                </tr>
+                {/eq}
+                {/volist}
+            </table>
+            <div class="pages" style="border: 0px">
+                {$list->render()}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

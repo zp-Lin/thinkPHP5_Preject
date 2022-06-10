@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑用户</title>
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/common.css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/mystyle3.css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/mystyle7.css" />
+    <style type="text/css" >
+        .message,.message2{
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+<h2>编辑用户</h2>
+{include file="index/admindivinfo"/}
+<div class="main">
+    <div class="categorylist">
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/addproduct')}" >新增宠物</a>
+        </div>
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/prodlist')}" >编辑宠物</a>
+        </div>
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/adduser')}" >新增用户</a>
+        </div>
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/userlist')}" >编辑用户</a>
+        </div>
+    </div>
+    <div id="content">
+        <div class="info2">
+            <h3><strong> 当前一共<span class="count">{$count}</span>个用户 </strong></h3>
+        </div>
+        <div class="prodlist">
+            <table id="table1">
+                <tr class="coltitle">
+                    <td>操作</td>
+                    <td>用户名</td>
+                    <td>真实姓名</td>
+                    <td>性别</td>
+                    <td>邮箱地址</td>
+                    <td>电话号码</td>
+                </tr>
+        {volist name="list" id="item" mod="2"}
+        {eq name="mod" value="1"}
+            <tr  class="message">
+                <td class="littletd">
+                    <a href="{:url('deluser?uid='.$item['username'])}" >
+                        <img src="/thinkphp5/public/static/commimages/btnDelete.png" alt="删除" class="btnimg">
+                    </a>
+                    <a href="{:url('resetpass?uid='.$item['username'])}" >
+                        <img src="/thinkphp5/public/static/commimages/btnnodekey.png" alt="重置密码" class="btnimg">
+                    </a>
+                </td>
+                <td>
+                    <a href="{:url('edituser?uid='.$item['username'])}" style="color: blue">
+                        {$item.username}
+                    </a>
+                </td>
+                <td>{$item.truename}</td>
+                <td>{$item.sex}</td>
+                <td>{$item.email}</td>
+                <td>{$item.phone}</td>
+            </tr>
+        {/eq}
+        {eq name="mod" value="0"}
+            <tr  class="message2">
+                <td class="littletd">
+                    <a href="{:url('deluser?uid='.$item['username'])}" >
+                        <img src="/thinkphp5/public/static/commimages/btnDelete.png" alt="删除" class="btnimg">
+                    </a>
+                    <a href="{:url('resetpass?uid='.$item['username'])}" >
+                        <img src="/thinkphp5/public/static/commimages/btnnodekey.png" alt="重置密码" class="btnimg">
+                    </a>
+                </td>
+                <td>
+                    <a href="{:url('edituser?uid='.$item['username'])}" style="color: blue">
+                        {$item.username}
+                    </a>
+                </td>
+                <td>{$item.truename}</td>
+                <td>{$item.sex}</td>
+                <td>{$item.email}</td>
+                <td>{$item.phone}</td>
+            </tr>
+        {/eq}
+        {/volist}
+        </table>
+            <div class="pages" style="border: 0px">
+                {$list->render()}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

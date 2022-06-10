@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/common.css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/mystyle1.css" />
+</head>
+<body>
+<h2>用户注册</h2>
+<div class="info">
+    {empty name="Think.session.user.username"}
+    <div class="welcome">
+        <a href="{:url('index/user/login')}">登录</a>
+        <a href="{:url('index/user/register')}">注册</a>
+    </div>
+    {else/}
+    <div class="welcome">欢迎您！{$Think.session.user.username}</div>
+    <div class="funclist">
+
+        <a href="{:url('index/index/cart')}">查看购物车</a>
+        (当前包含<span class="count">{$count}</span>种商品)
+        <a href="{:url('index/user/logout')}">退出登录</a>
+    </div>
+    {/empty}
+</div>
+<div class="main">
+    <div class="categorylist">
+        {volist name="catlist" id="catitem"}
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/heart.png" alt="" class="littleimg">
+            <a href="{:url('index/index?cid='.$catitem['categoryid'])}">{$catitem.name}</a>
+        </div>
+        {/volist}
+    </div>
+    <div id="content">
+        <form action="{:url('index/user/doregister')}" method="post">
+            <table>
+                <tr>
+                    <td class="ttd"><label for="username">用户名</label></td>
+                    <td><input type="text" name="username" id="username" required></td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="password">密码</label></td>
+                    <td><input type="password" name="password" id="password" required></td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="repassword">确认密码</label></td>
+                    <td><input type="password" name="repassword" id="repassword" required></td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="truename">真实姓名</label></td>
+                    <td><input type="text" name="truename" id="truename" required></td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="sex">性别</label></td>
+                    <td>
+                        <input type="radio" name="sex" id="male" value="male" checked="checked">男
+                        <input type="radio" name="sex" id="female" value="female">女
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="email">邮箱地址</label></td>
+                    <td><input type="email" name="email" id="email" value="zs@qq.com" required></td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="address">通讯地址</label></td>
+                    <td><input type="text" name="address" id="address" value="深圳市南山区留仙居6栋303室" required></td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="phone">联系电话</label></td>
+                    <td><input type="text" name="phone" id="phone" value="15212340001"required></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <button>注册</button>
+                        <button type="reset">重置</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <p class="p1">
+            <a href="{:url('index/user/login')}">已有账号？点击登录</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>

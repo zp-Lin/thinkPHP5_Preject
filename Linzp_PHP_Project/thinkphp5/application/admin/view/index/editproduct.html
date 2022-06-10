@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/common.css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/mystyle1.css">
+</head>
+<body>
+<h2>修改宠物</h2>
+{include file="index/admindivinfo" /}
+<div class="main">
+    <div class="categorylist">
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/addproduct')}">新增宠物</a>
+        </div>
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/prodlist')}">编辑宠物</a>
+        </div>
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/adduser')}">新增用户</a>
+        </div>
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+            <a href="{:url('index/userlist')}">编辑用户</a>
+        </div>
+    </div>
+    <div id="content">
+        <form action="{:url('admin/index/doeditproduct')}" enctype="multipart/form-data" method="post">
+            <table>
+                <tr>
+                    <td class="ttd"><label for="proname">宠物名</label></td>
+                    <td><input type="text" name="proname" id="username" value="{$proditem['productname']}" required></td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="category">宠物类别</label></td>
+                    <td>
+                        <select name="category" id="">
+                            {volist name="catlist" id="catitem"}
+                            {eq name="$catitem['categoryid']" value="$proditem['categoryid']"}
+                                <option value="{$catitem['categoryid']}" selected="selected">{$catitem.name}</option>
+                            {else /}
+                                <option value="{$catitem['categoryid']}">{$catitem.name}</option>
+                            {/eq}
+                            {/volist}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="price">价格</label></td>
+                    <td><input type="text" name="price" id="phone" value="{$proditem['unitprice']}"required></td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="des">描述</label></td>
+                    <td><input type="text" name="des" id="phone" value="{$proditem['descn']}"required></td>
+                </tr>
+                <tr>
+                    <td class="ttd"><label for="des">图片</label></td>
+                    <td>
+                        <img src="/thinkphp5/public/static/{$proditem.image}" alt="{$proditem.productname}" class="proimg">
+                        <label for="proimage">上传图片</label>
+                        <input type="file" name="proimage" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <button>修改</button>
+                        <button type="reset">重置</button>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="pid" value="{$proditem.productid}">
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<div class="info">
+    {empty name="Think.session.user.username"}
+    <div class="welcome">
+        <a href="{:url('index/user/login')}">登录</a>
+        <a href="{:url('index/user/register')}">注册</a>
+    </div>
+    {else/}
+    <div class="welcome">欢迎您！管理员（{$Think.session.user.username}）</div>
+    <div class="funclist">
+        <a href="{:url('index/user/logout')}">退出登录</a>
+        <a href="{:url('admin/index/resetpassword')}">修改密码</a>
+    </div>
+    {/empty}
+</div>

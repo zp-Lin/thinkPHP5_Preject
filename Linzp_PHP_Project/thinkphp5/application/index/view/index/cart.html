@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/common.css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/mystyle3.css" />
+</head>
+<body>
+<h2>购物车</h2>
+
+<div class="info">
+    {empty name="Think.session.user.username"}
+    <div class="welcome">
+        <a href="{:url('index/user/login')}">登陆</a>
+        <a href="{:url('index/user/register')}">注册</a>
+    </div>
+    {else/}
+    <div class="welcome">欢迎您！{$Think.session.user.username} </div>
+    <div class="funclist">
+        {neq name="count" value="0"}
+            <a href="{:url('index/index/checkout')}">结算订单</a>
+        {/neq}
+        <a href="{:url('index/index/index')}">宠物列表</a>
+        <a href="{:url('index/index/favorite')}">我的收藏</a>
+        <a href="{:url('index/user/logout')}">退出登陆</a>
+    </div>
+    {/empty}
+</div>
+<div class="main">
+    <div class="categorylist">
+        {volist name="catlist" id="catitem" }
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/heart.png" alt="" class="littleimg">
+            <a href="{:url('index?cid='.$catitem['categoryid'])}">{$catitem.name}</a>
+        </div>
+        {/volist}
+    </div>
+    <div id="content">
+        <div class="info2">
+            <h3><strong>当前包含<span class="count">{$count}</span>种商品，共计={$sumprice}元</strong></h3>
+        </div>
+        <div class="prodlist">
+            <table id="table1">
+                <tr class="coltitle">
+                    <td>操作</td>
+                    <td>图片</td>
+                    <td>商品</td>
+                    <td>单价</td>
+                    <td colspan="3">数量</td>
+                    <td>总价</td>
+                </tr>
+        {volist name="list" id="item" mod="2"}
+        {eq name="mod" value="1"}
+                <tr class="message">
+                    <td class="littletd">
+                        <a href="{:url('delformcart?pid='.$item['productid'])}" >
+                            <img src="/thinkphp5/public/static/commimages/button-delete.gif" alt="删除" class="btnimg">
+                        </a>
+                    </td>
+                    <td class="littletd">
+                        <a href="{:url('showproduct?pid='.$item['productid'])}" >
+                            <img src="/thinkphp5/public/static/{$item.image}" alt="{$item.productname}" class="proimg">
+                        </a>
+                    </td>
+                    <td> {$item.productname}</td>
+                    <td>{$item.unitprice}</td>
+                    <td class="littletd">
+                        <a href="{:url('decrease?pid='.$item['productid'])}" >
+                            <img src="/thinkphp5/public/static/commimages/button-back.gif" alt="减少" class="btnimg">
+                        </a>
+                    </td>
+                    <td>{$item.quantity}</td>
+                    <td clss="littletd">
+                        <a href="{:url('increase?pid='.$item['productid'])}" >
+                            <img src="/thinkphp5/public/static/commimages/button-continue.gif" alt="增加" class="btnimg">
+                        </a>
+                    </td>
+                    <td>{$item.sum}元</td>
+                </tr>
+        {/eq}
+        {eq name="mod" value="0"}
+                <tr class="message2">
+                    <td class="littletd">
+                        <a href="{:url('delformcart?pid='.$item['productid'])}" >
+                            <img src="/thinkphp5/public/static/commimages/button-delete.gif" alt="删除" class="btnimg">
+                        </a>
+                    </td>
+                    <td class="littletd">
+                        <a href="{:url('showproduct?pid='.$item['productid'])}" >
+                            <img src="/thinkphp5/public/static/{$item.image}" alt="{$item.productname}" class="proimg">
+                        </a>
+                    </td>
+                    <td> {$item.productname}</td>
+                    <td>{$item.unitprice}</td>
+                    <td class="littletd">
+                        <a href="{:url('decrease?pid='.$item['productid'])}" >
+                            <img src="/thinkphp5/public/static/commimages/button-back.gif" alt="减少" class="btnimg">
+                        </a>
+                    </td>
+                    <td>{$item.quantity}</td>
+                    <td clss="littletd">
+                        <a href="{:url('increase?pid='.$item['productid'])}" >
+                            <img src="/thinkphp5/public/static/commimages/button-continue.gif" alt="增加" class="btnimg">
+                        </a>
+                    </td>
+                    <td>{$item.sum}元</td>
+                </tr>
+            {/eq}
+            {/volist}
+            </table>
+        </div>
+        </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增用户</title>
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/common.css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/mystyle1.css" />
+</head>
+<body>
+    <h2>新增用户</h2>
+    {include file="index/admindivinfo" /}
+    <div class="main">
+        <div class="categorylist">
+            <div class="category">
+                <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+                <a href="{:url('index/addproduct')}">新增宠物</a>
+            </div>
+            <div class="category">
+                <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+                <a href="{:url('index/prodlist')}">编辑宠物</a>
+            </div>
+            <div class="category">
+                <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+                <a href="{:url('index/adduser')}">新增用户</a>
+            </div>
+            <div class="category">
+                <img src="/thinkphp5/public/static/commimages/btnnodeFunction.png" alt="" class="littleimg">
+                <a href="{:url('index/userlist')}">编辑用户</a>
+            </div>
+        </div>
+        <div id="content">
+            <form action="{:url('doadduser')}" method="post">
+                <table>
+                    <tr>
+                        <td class="ttd"><label for="username">用户名</label></td>
+                        <td><input type="text" name="username" id="username" required></td>
+                    </tr>
+                    <tr>
+                        <td class="ttd"><label for="truename">真实姓名</label></td>
+                        <td><input type="text" name="truename" id="truename" required></td>
+                    </tr>
+                    <tr>
+                        <td class="ttd"><label for="sex">性别</label></td>
+                        <td>
+                            <input type="radio" name="sex" id="male" value="male" checked="checked">男
+                            <input type="radio" name="sex" id="female">女
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button>新增</button>
+                            <button type="reset">重置</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

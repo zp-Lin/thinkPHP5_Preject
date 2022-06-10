@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/common.css" />
+    <link rel="stylesheet" href="/thinkphp5/public/static/css/mystyle5.css" />
+
+</head>
+<body>
+<h2>结算订单</h2>
+<div class="info">
+    {empty name="Think.session.user.username"}
+    <div class="welcome">
+        <a href="{:url('index/user/login')}">登录</a>
+        <a href="{:url('index/user/register')}">注册</a>
+    </div>
+    {else/}
+    <div class="welcome">欢迎您！{$Think.session.user.username}</div>
+    <div class="funclist">
+
+        <a href="{:url('index/index/cart')}">查看购物车</a>
+        (当前包含<span class="count">{$count}</span>种商品)
+        <a href="{:url('index/user/logout')}">退出登录</a>
+    </div>
+    {/empty}
+</div>
+<div class="main">
+    <div class="categorylist">
+        {volist name="catlist" id="catitem" }
+        <div class="category">
+            <img src="/thinkphp5/public/static/commimages/heart.png" alt="" class="littleimg">
+            <a href="{:url('index?cid='.$catitem['categoryid'])}">{$catitem.name}</a>
+        </div>
+        {/volist}
+    </div>
+    <div id="content">
+        <div class="prodlist">
+            <h3 class="p1">您购买了 {$count} 件宠物商品，共计 {$sum} 元。请填写相关支付信息！</h3>
+            <form action="{:url('index/Index/docheckout')}" method="post">
+                <table>
+                    <tr>
+                        <td class="ttd"><label for="cardno">信用卡号</label></td>
+                        <td><input type="text" name="cardno" id="cardno" required></td>
+                    </tr>
+                    <tr>
+                        <td class="ttd"><label for="expdate">有效期</label></td>
+                        <td><input type="text" name="expdate" id="expdate" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button>结算</button>
+                            <button type="reset">重置</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
